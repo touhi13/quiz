@@ -7,7 +7,7 @@ import Result from './pages/Result';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
