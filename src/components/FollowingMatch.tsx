@@ -4,35 +4,36 @@ import { QuestionInfo } from '../json/QuestionData';
 
 interface IProps {
     handleAns(option: string): void,
+
     isAns(arg: string): boolean,
-    question: QuestionInfo,
+
+    question: QuestionInfo
 }
 
-const FollowingMatch: React.FC<IProps> = ({ handleAns, isAns, question }) => {
+const FollowingMatch: React.FC<IProps> = ({handleAns, isAns, question}) => {
 
     return (
-        <Table>
+        <Table style={{width: "400px", margin: "auto"}}>
             <TableBody>
                 <TableRow>
-                    <TableCell>
-                        {
-                            question.matchAns?.map(ans => <TableCell key={ans}>{ans}</TableCell>)
-
-                        }
-                    </TableCell>
+                    <TableCell/>
+                    {
+                        question.matchAns?.map(ans => <TableCell key={ans}>{ans}</TableCell>)
+                    }
                 </TableRow>
+
                 {
-                    question.options.map(option =>
-                        <TableRow key={option}>
-                            <TableCell>{option}</TableCell>
+                    question.options.map(op =>
+                        <TableRow key={op}>
+                            <TableCell>{op}</TableCell>
                             {
                                 question.matchAns?.map(ans =>
                                     <TableCell key={ans}>
                                         <input
-                                        type="radio"
-                                        name={option}
-                                        value={ans}
-                                        onChange={e => handleAns(option+"->"+e.target.value)}
+                                            onChange={e => handleAns(op + "->" + e.target.value,)}
+                                            type="radio"
+                                            name={op}
+                                            value={ans}
                                         />
                                     </TableCell>
                                 )
@@ -41,7 +42,6 @@ const FollowingMatch: React.FC<IProps> = ({ handleAns, isAns, question }) => {
                     )
                 }
             </TableBody>
-
         </Table>
     );
 };

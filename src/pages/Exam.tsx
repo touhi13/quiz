@@ -84,8 +84,10 @@ const Exam: React.FC = () => {
         return !!ans.options.length;
     }
     const handleResult = () => {
+        console.log(filteredQuestion);
         let count: number = 0;
         answers.forEach(ans => {
+            console.log(filteredQuestion);
             for (let q of filteredQuestion) {
                 if (ans.id === q.id) {
                     if (JSON.stringify(ans.options) === JSON.stringify(q.ans)) {
@@ -100,17 +102,6 @@ const Exam: React.FC = () => {
     return (
         <Container  >
             <Typography variant="h5" component="h1">{userInfo.lang} Exam</Typography>
-            {/* {
-                filteredQuestion.map((q.i) => (
-            <Chip
-                color={isQuestionAns(q.id) ? "error" : "default"}
-                onClick={() => questionChange(i)}
-                sx={{ marginRight: "10px", cursor: "pointer" }}
-                key={q.id}
-                label={i + 1}
-            />
-            ))
-            } */}
             {
                 filteredQuestion.map((q, i) => (
                     <Chip
@@ -123,7 +114,17 @@ const Exam: React.FC = () => {
                 ))
             }
             <Question question={currentQ} handleAns={handleAns} isAns={isAns} />
-            <Button variant="contained" color="primary" onClick={handleResult}>Submit</Button>
+
+            {
+                questionNo > 0 && <Button onClick={() => questionChange(questionNo - 1)} variant="contained" color="primary" sx={{ marginRight: "10px" }}>Previous</Button>
+            }
+            {
+                questionNo < filteredQuestion.length - 1 && <Button onClick={() => questionChange(questionNo + 1)} variant="contained" color="primary" sx={{ marginRight: "10px" }}>Next</Button>
+            }
+            {
+                questionNo === filteredQuestion.length - 1 && <Button variant="contained" color="primary" onClick={handleResult}>Submit</Button>
+            }
+
         </Container>
     );
 };
