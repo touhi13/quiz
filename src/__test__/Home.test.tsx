@@ -36,19 +36,19 @@ describe('Home component', () => {
         fireEvent.change(input, { target: { value: 'John' } });
         expect(screen.getByTestId('submitButton')).toBeEnabled();
     });
+    let root;
+    domAct(() => {
+        testAct(() => {
+            root = create(
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                    </Routes>
+                </BrowserRouter>);
+        });
+    });
+    expect(root).toMatchSnapshot();
 });
 
 
 // ...
-let root;
-domAct(() => {
-    testAct(() => {
-        root = create(
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                </Routes>
-            </BrowserRouter>);
-    });
-});
-expect(root).toMatchSnapshot();

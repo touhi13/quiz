@@ -100,7 +100,7 @@ const Exam: React.FC = () => {
         navigate('/result', { state: { ansCount: count, count: filteredQuestion.length } })
     }
     return (
-        <Container  >
+        <Container  data-testid="exam">
             <Typography variant="h5" component="h1">{userInfo.lang} Exam</Typography>
             {
                 filteredQuestion.map((q, i) => (

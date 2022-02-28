@@ -29,7 +29,6 @@ const Result :React.FC= () => {
                 margin: "0 auto",
             }}
             />
-
         </div>
     );
 };
