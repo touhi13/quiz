@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { QuestionInfo } from '../json/QuestionData';
-import Question from '../pages/Question';
+import { QuestionDetails } from '../json/QuestionData';
+import Question from '../components/Question';
 
 test('render Question component', () => {
-    const question : QuestionInfo = {
+    const question : QuestionDetails = {
         id: 1,
         title: "string",
         options: [""],
@@ -17,11 +17,11 @@ test('render Question component', () => {
     const isAns =  () : boolean=>{
         return false
     }
-    const handleAns = () : void =>{
-        console.log("handleAns");
+    const handleQuestionAns = () : void =>{
+        console.log("handleQuestionAns");
 
     }
-    render(<Question question={question} isAns={isAns} handleAns={handleAns}/>);
+    render(<Question question={question} isAns={isAns} handleQuestionAns={handleQuestionAns}/>);
     const linkElement = screen.getByTestId("question");
     expect(linkElement).toBeInTheDocument();
 })

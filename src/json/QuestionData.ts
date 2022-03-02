@@ -4,7 +4,7 @@ export const trueFalse = "trueFalse";
 export const followingMatch = "followingMatch";
 export const multiSelect = "multiSelect";
 
-export interface QuestionInfo {
+export interface QuestionDetails {
     id: number,
     title: string,
     options: string[],
@@ -14,111 +14,111 @@ export interface QuestionInfo {
     type: string
 }
 
-export const qList: QuestionInfo[] = [
+export const questionData: QuestionDetails[] = [
     {
         id: 1,
         type: multipleChoice,
-        title: " React is based on?",
+        title: "Which of the following keywords is used to define a variable in Javascript?",
         options: [
-            "Modules", "Services", "Components", "Microservices"
+            "var", "let", "Both of them", "None of them"
         ],
-        ans: ["Components"],
-        lang: "React"
+        ans: ["Both of them"],
+        lang: "JavaScript"
     },
     {
         id: 2,
         type: fillInTheBlank,
-        title: "How many elements does a React component return __________?",
-        options: ["Single", "Both", "Double", "Multiple"],
+        title: "The __________ keyword is used to check whether the given property is valid or not in Javascript?",
+        options: ["in", "is in", "exists", "lies"],
         ans: ["Single"],
-        lang: "React"
+        lang: "JavaScript"
     },
     {
         id: 3,
         type: multiSelect,
-        title: "Props are in other components? ",
+        title: "Which of the following methods can be used to display data in some form using Javascript?",
         options: [
-            "Injected", "methods", "Props", "State"
+            "document.write()", "console.log()", "getElementbyId()", "strigify()"
         ],
-        ans: ["Injected", "methods"],
-        lang: "React"
+        ans: ["document.write()", "console.log()"],
+        lang: "JavaScript"
     },
     {
         id: 4,
         type: followingMatch,
         title: "Match the following",
         options: [
-            "js", "ts"
+            "Array", "Object"
         ],
-        matchAns: ["react", "angular"],
-        ans: ["js->react", "ts->angular"],
-        lang: "React"
+        matchAns: ["[]", "{}"],
+        ans: ["Array->[]", "Object->{}"],
+        lang: "JavaScript"
     },
     {
         id: 5,
         type: trueFalse,
-        title: "Babel is js Compiler?",
+        title: "The ‘toLocateString()’ method in JS returns a localized string representation of an object.",
         options: [
             "true", "false",
         ],
         ans: ["true"],
-        lang: "React"
+        lang: "JavaScript"
     },
     {
         id: 6,
         type: multipleChoice,
-        title: "HTML uses?",
+        title: "Who is known as the father of PHP?",
         options: [
-            "defined tags", "specified tagst", "fixed tag", "All above"
+            "Drek Kolkevi", "List Barely", "Rasmus Lerdrof", "None of the above"
         ],
-        ans: ["fixed tag"],
-        lang: "Html"
+        ans: ["Rasmus Lerdrof"],
+        lang: "PHP"
     },
     {
         id: 7,
         type: fillInTheBlank,
-        title: "HTML Block is known as ___________ ?",
+        title: "PHP stands for ___________ ?",
         options: [
-            "body", "tag", "Attribute", "Element"
+            "Hypertext Preprocessor", "Pretext Hypertext Preprocessor", "Personal Home Processor", "None of the above"
         ],
-        ans: ["tag"],
-        lang: "Html"
+        ans: ["Hypertext Preprocessor"],
+        lang: "PHP"
     },
     {
         id: 8,
         type: multiSelect,
-        title: "what other tag makes text bold ?",
+        title: "Which of the following is correct to add a comment in php?",
         options: [
-            "<fat>", "<strong>", "<black>", "<b>"
+            "& …… &", "// ……", "/* …… */", "None of the above"
         ],
-        ans: ["<strong>", "<b>"],
-        lang: "Html"
+        ans: ["// ……", "/* …… */"],
+        lang: "PHP"
     },
     {
         id: 9,
         type: trueFalse,
-        title: "display a picture in a HTML page using  img?",
+        title: " The strpos() function is used to search for a character/text in a string",
         options: [
             "true", "false",
         ],
         ans: ["true"],
-        lang: "Html"
+        lang: "PHP"
     },
     {
         id: 10,
         type: multipleChoice,
-        title: "What should be the first tag in any HTML document?",
+        title: "Which PHP function determines the last access time of a file?",
         options: [
-            "head", "title", "html", "document"
+            "filetime()", "fileatime()", "filectime()", "None of the above"
         ],
-        ans: ["html"],
-        lang: "Html"
+        ans: ["fileatime()"],
+        lang: "PHP"
     }
 ];
-export const getQuestionByLang = (value: string): QuestionInfo[] => {
-    return qList.filter(item => item.lang.toLowerCase() === value.toLowerCase());
+export const getQbyLang = (lang: string): QuestionDetails[] => {
+    return questionData.filter(item => item.lang.toLowerCase() === lang?.toLowerCase());
 }
 
-export const getQuestionById = (id: number) => {
-    return qList.filter(item => item.id === id);
+export const getQbyId = (id: number) => {
+    return questionData.filter(item => item.id === id);
 }

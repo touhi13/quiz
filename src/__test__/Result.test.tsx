@@ -3,8 +3,8 @@ import Result from '../pages/Result'
 import { fireEvent, render, screen } from '@testing-library/react';
 
 // test utils file
-const renderWithRouter = (ui, { route = '/' } = {}) => {
-    window.history.pushState({ansCount:1, count: 5}, 'Test page', route)
+const renderWithRouter = (ui:any, { route = '/' } = {}) => {
+    window.history.pushState({ansCount:1, count: 5}, 'Test Result Page', route)
 
     return render(ui, { wrapper: BrowserRouter })
 }

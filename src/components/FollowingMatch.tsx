@@ -1,16 +1,16 @@
 import { Table, TableBody, TableCell, TableRow } from '@mui/material';
 import React from 'react';
-import { QuestionInfo } from '../json/QuestionData';
+import { QuestionDetails } from '../json/QuestionData';
 
 interface IProps {
-    handleAns(option: string): void,
+    handleQuestionAns(option: string): void,
 
     isAns(arg: string): boolean,
 
-    question: QuestionInfo
+    question: QuestionDetails
 }
 
-const FollowingMatch: React.FC<IProps> = ({handleAns, isAns, question}) => {
+const FollowingMatch: React.FC<IProps> = ({handleQuestionAns, isAns, question}) => {
 
     return (
         <Table style={{width: "400px", margin: "auto"}}>
@@ -30,7 +30,7 @@ const FollowingMatch: React.FC<IProps> = ({handleAns, isAns, question}) => {
                                 question.matchAns?.map(ans =>
                                     <TableCell key={ans}>
                                         <input
-                                            onChange={e => handleAns(op + "->" + e.target.value,)}
+                                            onChange={e => handleQuestionAns(op + "->" + e.target.value,)}
                                             type="radio"
                                             name={op}
                                             value={ans}

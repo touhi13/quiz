@@ -1,17 +1,17 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
-import FollowingMatch from '../components/FollowingMatch';
-import MultipleChoice from '../components/MultipleChoice';
-import MultiSelect from '../components/MultiSelect';
-import { fillInTheBlank, multipleChoice, QuestionInfo, trueFalse } from '../json/QuestionData';
+import FollowingMatch from './FollowingMatch';
+import MultipleChoice from './MultipleChoice';
+import MultiSelect from './MultiSelect';
+import { fillInTheBlank, multipleChoice, QuestionDetails, trueFalse } from '../json/QuestionData';
 
 interface IProps {
-    handleAns(option: string, checked?: boolean): void,
+    handleQuestionAns(option: string, checked?: boolean): void,
     isAns(option: string): boolean,
-    question: QuestionInfo,
+    question: QuestionDetails,
 }
 
-const Question: React.FC<IProps> = ({handleAns,isAns,question}) => {
+const Question: React.FC<IProps> = ({handleQuestionAns,isAns,question}) => {
     return (
         question?(
             <Container data-testid="question">
@@ -19,15 +19,15 @@ const Question: React.FC<IProps> = ({handleAns,isAns,question}) => {
                 <Typography variant="h5">{question.title}</Typography>
                 {
                     [multipleChoice, trueFalse, fillInTheBlank].includes(question.type) &&
-                    <MultipleChoice handleAns={handleAns} isAns={isAns} question={question} />
+                    <MultipleChoice handleQuestionAns={handleQuestionAns} isAns={isAns} question={question} />
                 }
                 {
                     question.type === "followingMatch" &&
-                    <FollowingMatch handleAns={handleAns} isAns={isAns} question={question} />
+                    <FollowingMatch handleQuestionAns={handleQuestionAns} isAns={isAns} question={question} />
                 }
                 {
                     question.type === "multiSelect" &&
-                    <MultiSelect handleAns={handleAns} isAns={isAns} question={question} />
+                    <MultiSelect handleQuestionAns={handleQuestionAns} isAns={isAns} question={question} />
                 }
             </Container>
         ):<p>No question</p>

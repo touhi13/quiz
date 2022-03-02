@@ -44,28 +44,29 @@ describe('Home component', () => {
         );
         let input = screen.getByTestId("addName")
         fireEvent.change(input, { target: { value: 'Jhon' } })
-        console.log(expect(input).toHaveValue("Jhon"));
+        expect(input).toHaveValue("Jhon");
 
     });
-    // const mockHistoryPush = jest.fn();
+    const mockHistoryPush = jest.fn();
 
-    // jest.mock('react-router-dom', () => ({
-    //     ...jest.requireActual('react-router-dom'),
-    //     useHistory: () => ({
-    //         push: mockHistoryPush,
-    //     }),
-    // }));
-    // it('Redirects to correct URL on click', () => {
-    //      render(
-    //         <MemoryRouter>
-    //             <Home />
-    //         </MemoryRouter>,
-    //     );
-    //     const input = screen.getByTestId('addName');
-    //     fireEvent.change(input, { target: { value: 'John' } });
-    //     fireEvent.click(screen.getByTestId('submitButton'));
-    //     console.log(mockHistoryPush);  // eslint-disable-line no-console
-    //     expect(mockHistoryPush).toHaveBeenCalledWith("/exam");
-    // })
+    jest.mock('react-router-dom', () => ({
+        ...jest.requireActual('react-router-dom'),
+        useHistory: () => ({
+            push: mockHistoryPush,
+        }),
+    }));
+    it('Redirects to correct URL on click', () => {
+        render(
+            <MemoryRouter>
+                <Home />
+            </MemoryRouter>,
+        );
+        const input = screen.getByTestId('addName');
+        fireEvent.change(input, { target: { value: 'John' } });
+        fireEvent.click(screen.getByTestId('submitButton'));
+        console.log(mockHistoryPush);  // eslint-disable-line no-console
+        expect(mockHistoryPush).toHaveBeenCalledWith("/");
+    })
+    it
 });
 

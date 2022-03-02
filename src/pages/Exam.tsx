@@ -1,31 +1,34 @@
 import { Container, Typography, Chip, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { fillInTheBlank, followingMatch, getQuestionByLang, multipleChoice, multiSelect, trueFalse } from '../json/QuestionData';
-import { UserInfo } from './Home';
-import Question from './Question';
+import { fillInTheBlank, followingMatch, getQbyLang, multipleChoice, multiSelect, trueFalse } from '../json/QuestionData';
+import { ExamineeDetails } from './Home';
+import Question from '../components/Question';
 
-interface AnsInfo {
+interface Ans {
     id: number,
     options: string[],
 }
+
 const Exam: React.FC = () => {
 
     const navigate = useNavigate();
     const { state } = useLocation();
-    const userInfo = state as UserInfo;
+    const examinee = state as ExamineeDetails;
     const [questionNo, setQuestionNo] = useState<number>(0);
-    const [answers, setAnswers] = useState<AnsInfo[]>([]);
-    const filteredQuestion = getQuestionByLang(userInfo.lang);
+    const [answers, setAnswers] = useState<Ans[]>([]);
+
+    const filteredQuestion = getQbyLang(examinee?.lang);
     const currentQ = filteredQuestion[questionNo];
 
     const questionChange = (qNo: number) => {
         setQuestionNo(qNo);
     }
 
-    const handleAns = (option: string, checked?: boolean) => {
-        const find = answers.find(a => a.id === currentQ.id);
-        if (find) {
+    const handleQuestionAns = (option: string, checked?: boolean) => {
+
+        const question = answers.find(a => a.id === currentQ.id);
+        if (question) {
             if ([multipleChoice, trueFalse, fillInTheBlank].includes(currentQ.type)) {
                 const newAnswers = answers.map(a => {
                     if (a.id === currentQ.id) {
@@ -76,14 +79,14 @@ const Exam: React.FC = () => {
         }
         return !!ans.options.find(o => o === option);
     }
-    const isQuestionAns = (questionId: number) => {
+    const isAnswered = (questionId: number) => {
         const ans = answers.find(a => a.id === questionId);
         if (!ans) {
             return false;
         }
         return !!ans.options.length;
     }
-    const handleResult = () => {
+    const handleExamResult = () => {
         console.log(filteredQuestion);
         let count: number = 0;
         answers.forEach(ans => {
@@ -100,12 +103,12 @@ const Exam: React.FC = () => {
         navigate('/result', { state: { ansCount: count, count: filteredQuestion.length } })
     }
     return (
-        <Container  data-testid="exam">
-            <Typography variant="h5" component="h1">{userInfo.lang} Exam</Typography>
+        <Container data-testid="exam">
+            <Typography variant="h5" component="h1">{examinee?.lang} Exam</Typography>
             {
                 filteredQuestion.map((q, i) => (
                     <Chip
-                        color={isQuestionAns(q.id) ? "error" : "default"}
+                        color={isAnswered(q.id) ? "error" : "default"}
                         onClick={() => questionChange(i)}
                         sx={{ marginRight: "10px", cursor: "pointer" }}
                         key={q.id}
@@ -113,7 +116,7 @@ const Exam: React.FC = () => {
                     />
                 ))
             }
-            <Question question={currentQ} handleAns={handleAns} isAns={isAns} />
+            <Question question={currentQ} handleQuestionAns={handleQuestionAns} isAns={isAns} />
 
             {
                 questionNo > 0 && <Button onClick={() => questionChange(questionNo - 1)} variant="contained" color="primary" sx={{ marginRight: "10px" }}>Previous</Button>
@@ -122,7 +125,7 @@ const Exam: React.FC = () => {
                 questionNo < filteredQuestion.length - 1 && <Button onClick={() => questionChange(questionNo + 1)} variant="contained" color="primary" sx={{ marginRight: "10px" }}>Next</Button>
             }
             {
-                questionNo === filteredQuestion.length - 1 && <Button variant="contained" color="primary" onClick={handleResult}>Submit</Button>
+                questionNo === filteredQuestion.length - 1 && <Button variant="contained" color="primary" onClick={handleExamResult}>Submit</Button>
             }
 
         </Container>
