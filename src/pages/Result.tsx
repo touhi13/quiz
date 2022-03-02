@@ -23,7 +23,7 @@ const Result :React.FC= () => {
                 height: "400px",
                 backgroundImage: `conic-gradient(
                     green 0deg ${deg(result?.ansCount, result?.count - result?.ansCount)}deg,
-                    red ${deg(result.ansCount, result.count - result.ansCount)}deg 360deg
+                    red ${deg(result?.ansCount, result?.count - result?.ansCount)}deg 360deg
                 )`,
                 borderRadius: "50%",
                 margin: "0 auto",
