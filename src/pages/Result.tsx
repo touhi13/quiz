@@ -13,16 +13,16 @@ const Result :React.FC= () => {
         return (360*a)/(a+b);
     }
     return (
-        <div>
+        <div data-testid="result">
             <h2>Result Page</h2>
-            <h3 style={{color: 'green', padding: '5px', margin:"0"}}>Correct is {result.ansCount}</h3>
-            <h3 style={{color: 'red', padding: '5px', margin:"0"}}>Wrong is {result.count - result.ansCount}</h3>
+            <h3 style={{color: 'green', padding: '5px', margin:"0"}}>Correct is {result?.ansCount}</h3>
+            <h3 style={{color: 'red', padding: '5px', margin:"0"}}>Wrong is {result?.count - result?.ansCount}</h3>
             <div
             style={{
                 width: "400px",
                 height: "400px",
                 backgroundImage: `conic-gradient(
-                    green 0deg ${deg(result.ansCount, result.count - result.ansCount)}deg,
+                    green 0deg ${deg(result?.ansCount, result?.count - result?.ansCount)}deg,
                     red ${deg(result.ansCount, result.count - result.ansCount)}deg 360deg
                 )`,
                 borderRadius: "50%",

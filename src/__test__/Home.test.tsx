@@ -1,9 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Home from '../pages/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { act as domAct } from "react-dom/test-utils";
-import { act as testAct, create } from "react-test-renderer";
+import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 
 
 describe('Home component', () => {
@@ -36,19 +34,38 @@ describe('Home component', () => {
         fireEvent.change(input, { target: { value: 'John' } });
         expect(screen.getByTestId('submitButton')).toBeEnabled();
     });
-    let root;
-    domAct(() => {
-        testAct(() => {
-            root = create(
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                    </Routes>
-                </BrowserRouter>);
-        });
+    it('Inputs should have the correct value', () => {
+        render(
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
+            </BrowserRouter>
+        );
+        let input = screen.getByTestId("addName")
+        fireEvent.change(input, { target: { value: 'Jhon' } })
+        console.log(expect(input).toHaveValue("Jhon"));
+
     });
-    expect(root).toMatchSnapshot();
+    // const mockHistoryPush = jest.fn();
+
+    // jest.mock('react-router-dom', () => ({
+    //     ...jest.requireActual('react-router-dom'),
+    //     useHistory: () => ({
+    //         push: mockHistoryPush,
+    //     }),
+    // }));
+    // it('Redirects to correct URL on click', () => {
+    //      render(
+    //         <MemoryRouter>
+    //             <Home />
+    //         </MemoryRouter>,
+    //     );
+    //     const input = screen.getByTestId('addName');
+    //     fireEvent.change(input, { target: { value: 'John' } });
+    //     fireEvent.click(screen.getByTestId('submitButton'));
+    //     console.log(mockHistoryPush);  // eslint-disable-line no-console
+    //     expect(mockHistoryPush).toHaveBeenCalledWith("/exam");
+    // })
 });
 
-
-// ...

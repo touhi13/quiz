@@ -34,8 +34,8 @@ const Home: React.FC = () => {
                         <Typography variant='h4'>User Information</Typography>
                     </Grid>
                     <Grid item xs={12} >
-                        <TextField   inputProps={{ "data-testid": "addName" }}
- fullWidth name="name" value={userInfo.name} onChange={handleInputChange}></TextField>
+                        <TextField inputProps={{ "data-testid": "addName" }}
+                            fullWidth name="name" value={userInfo.name} onChange={handleInputChange} ></TextField>
                     </Grid>
 
                     <Grid item xs={12} >
