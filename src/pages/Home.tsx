@@ -28,11 +28,11 @@ const Home: React.FC = () => {
             }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Typography variant='h4'>User Information</Typography>
+                        <Typography variant='h4'>Examinee Details</Typography>
                     </Grid>
                     <Grid item xs={12} >
                         <TextField inputProps={{ "data-testid": "addName" }}
-                            fullWidth name="name" value={examinee.name} onChange={handleInputChange} ></TextField>
+                            fullWidth name="name" value={examinee.name} onChange={handleInputChange} label={"Name"}></TextField>
                     </Grid>
 
                     <Grid item xs={12} >

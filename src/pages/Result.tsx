@@ -11,15 +11,15 @@ interface IProps {
 const Result: React.FC = () => {
     const location = useLocation();
     const result = location.state as IProps;
-    const deg = (a: number, b: number) => {
-        return (360 * a) / (a + b);
-    }
+    // const deg = (a: number, b: number) => {
+    //     return (360 * a) / (a + b);
+    // }
     return (
         <div data-testid="result">
-            {/* <h2>Result Page</h2>
-            <h3 style={{color: 'green', padding: '5px', margin:"0"}}>Correct is {result?.ansCount}</h3>
-            <h3 style={{color: 'red', padding: '5px', margin:"0"}}>Wrong is {result?.count - result?.ansCount}</h3>
-            <div
+     <h2>Result Page</h2>
+            <h3 style={{color: '#E38627', padding: '5px', margin:"0"}}>Correct is {result?.ansCount}</h3>
+            <h3 style={{color: '#C13C37', padding: '5px', margin:"0"}}>Wrong is {result?.count - result?.ansCount}</h3>
+            {/* <div
             style={{
                 width: "400px",
                 height: "400px",
@@ -34,9 +34,17 @@ const Result: React.FC = () => {
 
             <PieChart
                 data={[
-                    { title: 'One', value: result?.ansCount, color: '#E38627' },
-                    { title: 'Two', value: (result?.count - result?.ansCount), color: '#C13C37' },
+                    { title: 'Wrong', value: (result?.count - result?.ansCount), color: '#C13C37' },
+                    { title: 'Correct', value: result?.ansCount, color: '#E38627'  },
                 ]}
+                // viewBoxSize={[100, 50]}
+                style={{ height: '400px' }}
+                label={({ dataEntry }) => dataEntry.title}
+                // labelStyle={{defaultLabelStyle                }}
+                labelStyle={(index) => ({
+                    fontSize: '5px',
+                    fontFamily: 'sans-serif',
+                  })}
             />;
         </div>
     );
